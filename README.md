@@ -1,1 +1,3 @@
-# ecea_website
+# ECEA Website
+
+Stack Using - MERN Stack
