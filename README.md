@@ -17,4 +17,14 @@ Stack Using - MERN Stack
 ---
 
 ### Running application
-1. After completing the installation process run ```npm run dev``` in the command line to start our application.
+1. Clone this repository using command ```git clone https://github.com/ECEA-CEG/ecea_website.git```.
+2. After cloning run ```npm i``` to install the dependencies.
+3. After completing the installation process run ```npm run dev``` in the command line to start our application.
+
+---
+
+### Pulling and pushing to a branch
+1. To push code into a branch in the remote repository, first you have to pull that branch from the remote repository using the command ```git pull origin <BRANCH_NAME>```. 
+2. Make sure that the remote repository branch name and the local repository branch name are same.
+3. Before pushing run ```git add .``` to stage all changes and do a local commit ```git commit -m <COMMIT_MESSAGE>```.
+3. Then push with the command ```git push origin <BRANCH_NAME>```.
