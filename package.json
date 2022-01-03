@@ -2,9 +2,10 @@
   "name": "ecea_website",
   "version": "1.0.0",
   "description": "Website for ECE CEG",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "set NODE_ENV=development&& nodemon server.js",
+    "prod": "set NODE_ENV=production&& nodemon server.js"
   },
   "repository": {
     "type": "git",

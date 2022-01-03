@@ -21,10 +21,35 @@ const userSchema = new mongoose.Schema({
         minlength: 6,
         select: false
     },
+    passwordConfirm: {
+        type: String,
+        required: [true, 'Please confirm your password'],
+        validate: {
+          // runs on 'SAVE' and 'CREATE' and not on 'UPDATE'
+          validator: function (el) {
+            return el === this.password;
+          },
+          message: `Password doesn't match!!!`
+        }
+    },
+    passwordChangedAt: Date,
     DateOfCreation: {
         type: Date,
         default: Date.now,
     }
+});
+
+userSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) return next();
+    this.password = await bcrypt.hash(this.password, 12);
+    this.passwordConfirm = undefined;
+    next();
+});
+  
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
 });
 
 const User = mongoose.model('User', userSchema);
