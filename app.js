@@ -9,6 +9,7 @@ const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./Controllers/errorController');
 const userRouter = require('./Routes/userRoutes');
+const paymentRouter = require('./Routes/paymentRoutes');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'Public')));
 app.use(morgan('dev'));
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/payments', paymentRouter);
 
 // error handlers
 app.all('*', (req, res, next) => {
