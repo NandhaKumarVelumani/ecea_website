@@ -21,8 +21,13 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
           "email": true
         },
         "reminder_enable": true,
-        // "callback_url": "https://example-callback-url.com/",
-        "callback_method": "get"
+        //"callback_url": "https://127.0.0.1/",
+        "callback_method": "get",
+        "options": {
+          "checkout": {
+            "name": "ECEA"
+          }
+        }
     });
 
     res.status(200).json({
