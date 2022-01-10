@@ -15,7 +15,8 @@ exports.signup = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        message: 'Account Created'
+        message: 'Account Created',
+        uid : newUser.uid,
     });
 });
 
