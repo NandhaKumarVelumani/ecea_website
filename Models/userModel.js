@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     uid:{
       type: String,
       default: function(){
-        return this.email.substring(0,2)+ Date.now().toString(36).substring(3);
+        return this.email.substring(0,1)+ Date.now().toString(36).substring(2);
       }
     },
     passwordChangedAt: Date,
