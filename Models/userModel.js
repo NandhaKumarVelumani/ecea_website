@@ -2,12 +2,12 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const timezone = require('mongoose-timezone');
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, 'Provide a username.'],
-        //unique: true
     },
     email: {
         type: String,
@@ -16,10 +16,37 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         validate: [validator.isEmail, `Please provide a valid email`]
     },
+    phone: {
+      type: String,
+      required: [true,'Provide a Phone number'],
+      unique: true,
+      minlength:[10,`Please provide valid 10 digit mobile number`],
+      maxlength:[10,`Please provide valid 10 digit mobile number`],
+      validate: [validator.isNumeric ,`Please provide a valid number`]
+    },
+    college:{
+      type: String,
+      required: [true,'Mention your college']
+    },
+    year:{
+      type: String,
+      required: [true,'Mention your year of study'],
+      enum:['1st','2nd','3rd','4th','5th']
+    },
+    grad:{
+      type: String,
+      enum:['ug','pg'],
+      required: [true,'Mention whether ug or pg']
+    },
+    rollno:{
+      type: String,
+      unique: true,
+      validate: [validator.isNumeric ,`Please provide a valid roll number`]
+    },
     password: {
         type: String,
         required: [true, 'Provide a password.'],
-        minlength: 6,
+        minlength: [6,`Minimum password length is 6`],
         select: false
     },
     passwordConfirm: {
@@ -47,6 +74,7 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
     }
 });
+userSchema.plugin(timezone, { paths: ['DateofCreation.default'] });
 userSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);
