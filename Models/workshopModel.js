@@ -30,5 +30,5 @@ const workshopSchema = new mongoose.Schema({
 
 
 workshopSchema.plugin(timezone, { paths: ['DateofCreation.default'] });
-const Workshop = mongoose.model('Program', workshopSchema);
+const Workshop = mongoose.model('Workshop', workshopSchema);
 module.exports = Workshop;

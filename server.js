@@ -18,7 +18,7 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => {
-    console.log('Local DB Connection successfull...');
+    console.log('Local DB Connection successful...');
   })
   .catch(err => {
     console.log('Local DB not connected...')

@@ -10,6 +10,8 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./Controllers/errorController');
 const userRouter = require('./Routes/userRoutes');
 const paymentRouter = require('./Routes/paymentRoutes');
+const workshopRouter = require('./Routes/workshopRoutes');
+const eventRouter = require('./Routes/eventRoutes');
 
 const app = express();
 
@@ -24,6 +26,8 @@ app.use(morgan('dev'));
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/payments', paymentRouter);
+app.use('/api/v1/workshops', workshopRouter);
+app.use('/api/v1/events', eventRouter);
 
 // error handlers
 app.all('*', (req, res, next) => {

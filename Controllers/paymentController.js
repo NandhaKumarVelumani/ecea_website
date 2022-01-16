@@ -54,6 +54,6 @@ exports.verify = catchAsync(async function(req, res, next) {
    }
  res.status(200).json({
        status: 'success',
-       message: 'Payment verfied',
+       message: 'Payment verified',
    });
 })

@@ -18,7 +18,7 @@ exports.deleteOne = Model =>
 
 exports.updateOne = Model =>
   catchAsync(async (req, res, next) => {
-    const doc = await Model.findOneAndUpdate({uid:req.params.uid}, req.body, {
+    const doc = await Model.findOneAndUpdate({id:req.params.id}, req.body, {
       new: true,
       runValidators: true
     });
@@ -49,7 +49,7 @@ exports.createOne = Model =>
 
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
-    let query = Model.find({uid:req.params.uid});
+    let query = Model.find({id:req.params.id});
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
 
