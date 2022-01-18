@@ -1,18 +1,29 @@
 var nodemailer = require('nodemailer');
-//require('dotenv').config({ path: './config.env' });
+require('dotenv').config({ path: './config.env' });
 var hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
-var transport = nodemailer.createTransport(
+/*var transport = nodemailer.createTransport(
     {
         service:'gmail',
         auth:{
-            user: process.env.USER, //'web.assisst.ecea@gmail.com',
+            user: process.env.USER,    //'web.assisst.ecea@gmail.com',
             pass: process.env.PASSWORD //'websupport@ECEA'
         }
     }
+) */
+//Below uses Mailjet 
+var transport = nodemailer.createTransport(
+    {
+        host:process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure:false,
+        auth:{
+            user: process.env.MAILJET_USER,    //'web.assisst.ecea@gmail.com',
+            pass: process.env.MAILJET_PASS //'websupport@ECEA'
+        }
+    }
 )
-
 //template
 
 const handlebarOptions = {
@@ -30,12 +41,11 @@ transport.use('compile',hbs(handlebarOptions));
 //send out email
 
 module.exports.sendConfirmationEmail = (name, email,uid) => {
-    console.log("Check");
     transport.sendMail({
-      from: process.env.USER,
+      from: 'ECEA CEG <web_assist@eceaceg.in>',
       to: email,
-      subject: "WELCOME TO ECEA",
+      subject: `Sign up successful, ${name}`,
     template: 'temp2',
-    context: {uid:uid}
+    context: {uid:uid,name:name}
     }).catch(err => console.log(err));
   };
