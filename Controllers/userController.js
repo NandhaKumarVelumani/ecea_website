@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-
+const nodemailer = require('../utils/nodemailer');
 const User = require('../Models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -26,6 +26,11 @@ exports.signup = catchAsync(async (req, res, next) => {
       password: req.body.password,
       passwordConfirm: req.body.passwordConfirm
     });
+
+    nodemailer.sendConfirmationEmail(
+      req.body.name,
+      req.body.email
+);
 
     res.status(200).json({
         status: 'success',
