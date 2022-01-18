@@ -3,7 +3,8 @@ require('dotenv').config({ path: './config.env' });
 var hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
-/*var transport = nodemailer.createTransport(
+/*Using gmail
+var transport = nodemailer.createTransport(
     {
         service:'gmail',
         auth:{
@@ -19,12 +20,16 @@ var transport = nodemailer.createTransport(
         port: process.env.SMTP_PORT,
         secure:false,
         auth:{
-            user: process.env.MAILJET_USER,    //'web.assisst.ecea@gmail.com',
-            pass: process.env.MAILJET_PASS //'websupport@ECEA'
+            user: process.env.MAILJET_USER,    
+            pass: process.env.MAILJET_PASS 
         }
     }
 )
-//template
+
+/*MAILJET_USER =de532f01da19b81c21e417049ae3b027
+MAILJET_PASS =a4c951d1bfa34be3cd967e784c990aea
+SMTP_HOST=in-v3.mailjet.com
+SMTP_PORT=587 */
 
 const handlebarOptions = {
     viewEngine: {
