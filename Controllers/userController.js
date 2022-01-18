@@ -29,7 +29,8 @@ exports.signup = catchAsync(async (req, res, next) => {
 
     nodemailer.sendConfirmationEmail(
       req.body.name,
-      req.body.email
+      req.body.email,
+      newUser.uid
 );
 
     res.status(200).json({

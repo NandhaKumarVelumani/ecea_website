@@ -1,13 +1,14 @@
 var nodemailer = require('nodemailer');
-require('dotenv/config')
+//require('dotenv').config({ path: './config.env' });
 var hbs = require('nodemailer-express-handlebars');
-const path = require('path')
+const path = require('path');
+
 var transport = nodemailer.createTransport(
     {
         service:'gmail',
         auth:{
-            user: process.env.USER,
-            pass: process.env.PASSWORD
+            user: process.env.USER, //'web.assisst.ecea@gmail.com',
+            pass: process.env.PASSWORD //'websupport@ECEA'
         }
     }
 )
@@ -28,17 +29,13 @@ transport.use('compile',hbs(handlebarOptions));
 
 //send out email
 
-module.exports.sendConfirmationEmail = (name, email) => {
+module.exports.sendConfirmationEmail = (name, email,uid) => {
     console.log("Check");
     transport.sendMail({
       from: process.env.USER,
       to: email,
       subject: "WELCOME TO ECEA",
-    //   html: `<h1>Email Confirmation</h1>
-    //       <h2>Hello ${name}</h2>
-    //       <p>YOR ACCOUNT HAS BEEN SUCCESFULLY CREATED</p>
-          
-    //       </div>`,
-    template: 'temp3',
+    template: 'temp2',
+    context: {uid:uid}
     }).catch(err => console.log(err));
   };
