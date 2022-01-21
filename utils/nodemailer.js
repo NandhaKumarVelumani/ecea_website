@@ -13,22 +13,22 @@ var transport = nodemailer.createTransport(
         }
     }
 ) */
-//Below uses Mailjet 
+//Below uses SendinBlue
 var transport = nodemailer.createTransport(
     {
         host:process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
         secure:false,
         auth:{
-            user: process.env.MAILJET_USER,    
-            pass: process.env.MAILJET_PASS 
+            user: process.env.SENDIB_USER,    
+            pass: process.env.SENDIB_PASS 
         }
     }
 )
 
-/*MAILJET_USER =de532f01da19b81c21e417049ae3b027
-MAILJET_PASS =a4c951d1bfa34be3cd967e784c990aea
-SMTP_HOST=in-v3.mailjet.com
+/*SENDIB_USER =web.assisst.ecea@gmail.com
+SENDIB_PASS =LwhdgxRVBUtZyvca
+SMTP_HOST=smtp-relay.sendinblue.com
 SMTP_PORT=587 */
 
 const handlebarOptions = {
@@ -47,7 +47,7 @@ transport.use('compile',hbs(handlebarOptions));
 
 module.exports.sendConfirmationEmail = (name, email,uid) => {
     transport.sendMail({
-      from: 'ECEA CEG <web_assist@eceaceg.in>',
+      from: 'VISION | ECEA <web_assist@eceaceg.in>',
       to: email,
       subject: `Sign up successful, ${name}`,
     template: 'temp2',
