@@ -8,6 +8,7 @@ const morgan = require('morgan');
 //imported functions
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./Controllers/errorController');
+const paymentController = require('./Controllers/paymentController');
 const userRouter = require('./Routes/userRoutes');
 const paymentRouter = require('./Routes/paymentRoutes');
 const workshopRouter = require('./Routes/workshopRoutes');
@@ -17,7 +18,7 @@ const app = express();
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'Views'));
-
+app.post('/api/v1/payments/webhookVerify', express.raw({type:'application/json'}),paymentController.webhookVerify);
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 

@@ -22,8 +22,11 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
           "email": true
         },
         "reminder_enable": true,
-        "callback_url": `${req.protocol}://${req.get('host')}/api/v1/payments/verify`,
-        "callback_method": "get",
+        //"callback_url": `${req.protocol}://${req.get('host')}/api/v1/payments/verify`,
+        //"callback_method": "get",
+        notes: {
+          "title": "ML Workshop",
+        },
         "options": {
           "checkout": {
             "name": "ECEA"
@@ -39,7 +42,7 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
         }
     });
 });
-exports.verify = catchAsync(async function(req, res, next) {
+/*exports.verify = catchAsync(async function(req, res, next) {
   body = req.query.razorpay_payment_link_id + '|' +req.query.razorpay_payment_link_reference_id + '|' +
                     req.query.razorpay_payment_link_status + '|' +
                     req.query.razorpay_payment_id;
@@ -56,4 +59,17 @@ exports.verify = catchAsync(async function(req, res, next) {
        status: 'success',
        message: 'Payment verified',
    });
-})
+})*/
+exports.webhookVerify = catchAsync(async function(req, res, next) {
+  const mySecret = "test123";
+  const signature = req.headers["x-razorpay-signature"];
+  if(razorpay.validateWebhookSignature(req.body, signature, mySecret)){
+    console.log('Payment verified..');
+    //CREATE NEW BOOKING
+    
+  }
+
+  res.status(200).json({
+    received: true
+});
+});
