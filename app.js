@@ -13,6 +13,7 @@ const userRouter = require('./Routes/userRoutes');
 const paymentRouter = require('./Routes/paymentRoutes');
 const workshopRouter = require('./Routes/workshopRoutes');
 const eventRouter = require('./Routes/eventRoutes');
+const bookingRouter = require('./Routes/bookingRoutes');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/payments', paymentRouter);
 app.use('/api/v1/workshops', workshopRouter);
 app.use('/api/v1/events', eventRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 // error handlers
 app.all('*', (req, res, next) => {

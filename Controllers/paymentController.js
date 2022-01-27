@@ -41,10 +41,7 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
         status: 'success',
         data: {
             id: response.id,
-            short_url: response.short_url,
-            workshopId: response.notes["workshopId"],
-            email: response.customer["email"],
-            price: response.amount/100
+            short_url: response.short_url
         }
     });
 });
@@ -62,7 +59,6 @@ exports.webhookVerify = function(req, res, next) {
   try{
   if(razorpay.validateWebhookSignature(req.body, signature, mySecret)){
     console.log('Payment verified..creating booking...');
-    console.log(JSON.parse(req.body).payload['payment'].entity["amount"]);
     createBookingCheckout(JSON.parse(req.body).payload['payment'].entity);
     console.log('Booking created!');
   }
