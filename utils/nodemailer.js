@@ -13,23 +13,18 @@ var transport = nodemailer.createTransport(
         }
     }
 ) */
-//Below uses SendinBlue
+//Below uses Mailjet
 var transport = nodemailer.createTransport(
     {
         host:process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
         secure:false,
         auth:{
-            user: process.env.SENDIB_USER,    
-            pass: process.env.SENDIB_PASS 
+            user: process.env.MAILJET_USER,    
+            pass: process.env.MAILJET_PASS 
         }
     }
 )
-
-/*SENDIB_USER =web.assisst.ecea@gmail.com
-SENDIB_PASS =LwhdgxRVBUtZyvca
-SMTP_HOST=smtp-relay.sendinblue.com
-SMTP_PORT=587 */
 
 const handlebarOptions = {
     viewEngine: {
