@@ -4,8 +4,8 @@ const path = require('path');
 //other-modules
 const express = require('express');
 const morgan = require('morgan');
-const AdminBro = require('adminjs');
-const AdminBroExpress = require('@adminjs/express');
+const AdminJS = require('adminjs');
+const AdminJSExpress = require('@adminjs/express');
 
 
 
@@ -18,21 +18,46 @@ const paymentRouter = require('./Routes/paymentRoutes');
 const workshopRouter = require('./Routes/workshopRoutes');
 const eventRouter = require('./Routes/eventRoutes');
 const bookingRouter = require('./Routes/bookingRoutes');
-const mongoose = require('mongoose');
-const AdminBroMongoose = require('@adminjs/mongoose');
+const User = require('./Models/userModel');
 const Booking = require('./Models/bookingModel');
-AdminBro.registerAdapter(AdminBroMongoose);
-const app = express();
-const adminJs = new AdminBro({
-    databases: [],
-    rootPath: '/admin',
-  })
-const User = mongoose.model('user', { name: String, email: String, surname: String })
-const adminJsOptions = {
-  resources: [User],
+const Workshop = require('./Models/workshopModel');
+const mongoose = require('mongoose');
+const AdminJSMongoose = require('@adminjs/mongoose');
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
+AdminJS.registerAdapter(AdminJSMongoose);
+app = new express();
+const AdminJSOptions = {resources: [
+  {resource: Booking , options: { listProperties: ['workshop', 'user'] }},
+  User,
+  Workshop
+]};
+const adminJs = new AdminJS(AdminJSOptions);
+
+const ADMIN = {
+  email: 'admin@example.com',
+  password: 'password',
 }
-const adminBro = new AdminBro(adminJsOptions);
-const router = AdminBroExpress.buildRouter(adminBro);
+
+// const router = AdminJSExpress.buildRouter(adminJs)
+const router = AdminJSExpress.buildAuthenticatedRouter(adminJs, {
+  authenticate: async (email, password) => {
+    if (ADMIN.password === password && ADMIN.email === email) {
+      return ADMIN
+    }
+    return null
+  },
+  cookieName: 'adminjs',
+  cookiePassword: 'somepassword',
+});
+
+app.use(adminJs.options.rootPath, router);
+
+const run = async () => {
+  const mongooseConnection = await mongoose.connect(process.env.DATABASE_URL);
+  app.listen(8080, () => console.log('AdminJs is under localhost:8080/admin'));
+}
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'Views'));
 app.post('/api/v1/payments/webhookVerify', express.raw({type:'application/json'}),paymentController.webhookVerify);
@@ -41,7 +66,7 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(morgan('dev'));
-app.use(adminBro.options.rootPath, router);
+
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/payments', paymentRouter);
 app.use('/api/v1/workshops', workshopRouter);
@@ -54,5 +79,5 @@ app.all('*', (req, res, next) => {
 });
   
 app.use(globalErrorHandler);
-
+run();
 module.exports = app;

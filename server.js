@@ -1,9 +1,7 @@
 const app = require('./app');
-const AdminBro = require('adminjs');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const AdminBroMongoose = require('@adminjs/mongoose');
-AdminBro.registerAdapter(AdminBroMongoose);
+
+
 
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION SHUTTING DOWN!!!');
@@ -11,11 +9,10 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-dotenv.config({ path: './config.env' });
-const url = process.env.DATABASE_URL;
 
 
 /*
+const url = process.env.DATABASE_URL;
 mongoose
   .connect(url, {
     useNewUrlParser: true,
@@ -28,11 +25,14 @@ mongoose
     console.log('Local DB not connected...')
   });
 */
+
+
+/*
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
-
+*/
 process.on('SIGTERM', () => {
   console.log('SIGTERM RECIEVED. Shutting down gracefully!!!');
   server.close(() => {
