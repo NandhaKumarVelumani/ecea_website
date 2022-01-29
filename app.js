@@ -6,7 +6,9 @@ const express = require('express');
 const morgan = require('morgan');
 const AdminJS = require('adminjs');
 const AdminJSExpress = require('@adminjs/express');
-
+const mongoose = require('mongoose');
+const AdminJSMongoose = require('@adminjs/mongoose');
+const dotenv = require('dotenv');
 
 
 //imported functions
@@ -21,21 +23,27 @@ const bookingRouter = require('./Routes/bookingRoutes');
 const User = require('./Models/userModel');
 const Booking = require('./Models/bookingModel');
 const Workshop = require('./Models/workshopModel');
-const mongoose = require('mongoose');
-const AdminJSMongoose = require('@adminjs/mongoose');
-const dotenv = require('dotenv');
+
 dotenv.config({ path: './config.env' });
 AdminJS.registerAdapter(AdminJSMongoose);
 app = new express();
 const AdminJSOptions = {resources: [
-  {resource: Booking , options: { listProperties: ['workshop', 'user'] }},
-  User,
+  {resource: Booking , options: { listProperties: ['workshop', 'user']}},
+  { resource: User, options: { properties: {
+    uid: {isVisible: { list: false, filter: false, show: true, edit: false }},
+    password: {isVisible: { list: false, filter: false, show: false, edit: false }},
+    passwordConfirm: {isVisible: { list: false, filter: false, show: false, edit: false }},
+    passwordChangedAt: {isVisible: { list: false, filter: false, show: false, edit: false }},
+    passwordResetToken: {isVisible: { list: false, filter: false, show: false, edit: false }},
+    passwordResetExpires: {isVisible: { list: false, filter: false, show: false, edit: false }},
+    DateOfCreation: {isVisible: { list: false, filter: false, show: true, edit: false }}
+  }}},
   Workshop
 ]};
 const adminJs = new AdminJS(AdminJSOptions);
 
 const ADMIN = {
-  email: 'admin@example.com',
+  email: 'admin@eceaceg.in',
   password: 'password',
 }
 
