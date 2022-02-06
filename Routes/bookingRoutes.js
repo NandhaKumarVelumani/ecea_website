@@ -5,12 +5,10 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(bookingController.getAllBookings)
-  .post(bookingController.createBooking);
+  .get(bookingController.getAllBookings);
 router
   .route('/:id')
   .get(bookingController.getBooking)
-  .patch(bookingController.updateBooking)
-  .delete(bookingController.deleteBooking);
+  .post(bookingController.createBooking);
   
 module.exports = router;

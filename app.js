@@ -62,7 +62,16 @@ const router = AdminJSExpress.buildAuthenticatedRouter(adminJs, {
 app.use(adminJs.options.rootPath, router);
 
 const run = async () => {
-  const mongooseConnection = await mongoose.connect(process.env.DATABASE_URL);
+  const mongooseConnection = await mongoose.connect(process.env.DATABASE_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log('Local DB Connection successful...');
+  })
+  .catch(err => {
+    console.log('Local DB not connected...')
+  });;
   app.listen(8080, () => console.log('AdminJs is under localhost:8080/admin'));
 }
 
