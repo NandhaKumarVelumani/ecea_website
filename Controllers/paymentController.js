@@ -8,7 +8,6 @@ const User= require('../Models/userModel');
 
 exports.createPaymentLink = catchAsync(async (req, res, next) => {
     console.log('Creating Payment Link...');
-    //var instance = new razorpay({ key_id: 'rzp_test_zU5FEWlErmCH2F', key_secret: 'wHUrX88aDKems326mcul6oBz' });
     var instance = new razorpay({ key_id: process.env.RAZORPAY_KEY_ID , key_secret: process.env.RAZORPAY_KEY_SECRET });
     const response = await instance.paymentLink.create({
         "amount": parseInt(req.body.amount),
@@ -27,8 +26,7 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
         //"callback_url": `${req.protocol}://${req.get('host')}/api/v1/payments/verify`,
         //"callback_method": "get",
         notes: {
-          "title": "ML Workshop",
-          "workshopId": req.params.id,
+          "bookingId": req.params.id,
         },
         "options": {
           "checkout": {
@@ -46,11 +44,9 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
     });
 });
 
-const createBookingCheckout = catchAsync(async session => {
-  const workshop = session.notes["workshopId"];
-  const user = (await User.findOne({ email: session.email })).id;
-  const price = session.amount / 100;
-  await Booking.create({ workshop, user, price });
+const paymentCheckout = catchAsync(async session => {
+  const bookingid = session.notes["bookingId"];
+  await Booking.findByIdAndUpdate(bookingid,{ paid:true });
 });
 
 exports.webhookVerify = function(req, res, next) {
@@ -59,7 +55,7 @@ exports.webhookVerify = function(req, res, next) {
   try{
   if(razorpay.validateWebhookSignature(req.body, signature, mySecret)){
     console.log('Payment verified..creating booking...');
-    createBookingCheckout(JSON.parse(req.body).payload['payment'].entity);
+    paymentCheckout(JSON.parse(req.body).payload['payment'].entity);
     console.log('Booking created!');
   }
 }
