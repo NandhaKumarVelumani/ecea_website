@@ -42,10 +42,11 @@ transport.use('compile',hbs(handlebarOptions));
 
 module.exports.sendConfirmationEmail = (name, email,uid) => {
     transport.sendMail({
-      from: 'VISION | ECEA <web_assist@eceaceg.in>',
+      from: `bharathsankarvps@gmail.com`,
       to: email,
       subject: `Sign up successful, ${name}`,
-    template: 'temp2',
+      template: 'temp2',
+      replyTo:'web_assist@eceaceg.in',
     context: {uid:uid,name:name}
     }).catch(err => console.log(err));
   };

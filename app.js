@@ -72,7 +72,7 @@ const run = async () => {
   .catch(err => {
     console.log('Local DB not connected...')
   });;
-  app.listen(8080, () => console.log('AdminJs is under localhost:8080/admin'));
+  app.listen(process.env.PORT, () => console.log('AdminJs is under localhost:3000/admin'));
 }
 
 app.set('view engine', 'pug');
