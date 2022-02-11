@@ -42,7 +42,7 @@ transport.use('compile',hbs(handlebarOptions));
 
 module.exports.sendConfirmationEmail = (name, email,uid) => {
     transport.sendMail({
-      from: `bharathsankarvps@gmail.com`,
+      from: `VISION'22 | CEG <web_assist@eceaceg.in>`,
       to: email,
       subject: `Sign up successful, ${name}`,
       template: 'temp2',
