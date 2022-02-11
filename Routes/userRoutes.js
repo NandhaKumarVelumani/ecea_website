@@ -12,8 +12,8 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 //Add Protect Middleware here 
 router.patch('/updateMyPassword', authenticateToken.authenticateToken, authController.updatePassword);
 router.patch('/updateMe', authenticateToken.authenticateToken, userController.updateMe);
-
-//ADMIN AUTH REQUIRED HERE
+router.get('/me', authenticateToken.authenticateToken,userController.getMe, userController.getUser);
+//ADMIN AUTH REQUIRED HERE (should remove below routes in final version!)
 router
   .route('/')
   .get(userController.getAllUsers);
