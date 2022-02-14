@@ -4,7 +4,7 @@ const authenticateToken = require('../Controllers/authenticateToken');
 
 const router = express.Router();
 
-router.post('/:id',authenticateToken.authenticateToken,eventbookingController.createEventBooking);
+router.post('/bookEvent/:id',authenticateToken.authenticateToken,eventbookingController.createEventBooking);
 //ADMIN AUTH REQUIRED HERE(should remove below routes in final version!)
 router
   .route('/')

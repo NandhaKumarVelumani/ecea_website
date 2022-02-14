@@ -5,28 +5,35 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Booking = require('../Models/bookingModel');
 const User= require('../Models/userModel');
+const Workshop = require('../Models/workshopModel');
 
 exports.createPaymentLink = catchAsync(async (req, res, next) => {
     console.log('Creating Payment Link...');
+    const workshop = await Workshop.findById(req.params.id);
     var instance = new razorpay({ key_id: process.env.RAZORPAY_KEY_ID , key_secret: process.env.RAZORPAY_KEY_SECRET });
     const response = await instance.paymentLink.create({
-        "amount": parseInt(req.body.amount),
+        "amount": parseInt(workshop.amount),
         "currency": "INR",
-        "description": req.body.description,
+        "description": "Vision'22 Workshop Payment",
         "customer": {
-          "name": req.body.name,
-          "email": req.body.email,
-          "contact": req.body.contact
+          "name": req.user.name,
+          "email": req.user.email,
+          "contact": req.user.phone
         },
         "notify": {
           "sms": false,
-          "email": false
+          "email": true
         },
         "reminder_enable": true,
         //"callback_url": `${req.protocol}://${req.get('host')}/api/v1/payments/verify`,
         //"callback_method": "get",
         notes: {
-          "bookingId": req.params.id,
+          "workshopId": workshop.id,
+          "user": req.user.id, 
+          "mem1":req.user.uid,
+          "mem2": req.body.mem2,
+          "mem3": req.body.mem3,
+          "mem4": req.body.mem4,
         },
         "options": {
           "checkout": {
@@ -45,8 +52,16 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
 });
 
 const paymentCheckout = catchAsync(async session => {
-  const bookingid = session.notes["bookingId"];
-  await Booking.findByIdAndUpdate(bookingid,{ paid:true });
+  const workshopid = session.notes["workshopId"];
+  await Booking.create({
+    workshop: session.notes["workshopId"],
+    user: session.notes["user"], 
+    mem1: session.notes["mem1"],
+    mem2: session.notes["mem2"],
+    mem3: session.notes["mem3"],
+    mem4: session.notes["mem4"],
+    paid: true
+  });
 });
 
 exports.webhookVerify = function(req, res, next) {
