@@ -12,7 +12,7 @@ exports.createPaymentLink = catchAsync(async (req, res, next) => {
     const workshop = await Workshop.findById(req.params.id);
     var instance = new razorpay({ key_id: process.env.RAZORPAY_KEY_ID , key_secret: process.env.RAZORPAY_KEY_SECRET });
     const response = await instance.paymentLink.create({
-        "amount": parseInt(workshop.amount),
+        "amount": parseInt(workshop.price),
         "currency": "INR",
         "description": "Vision'22 Workshop Payment",
         "customer": {
