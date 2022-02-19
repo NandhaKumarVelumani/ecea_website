@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>Login and Registration</title>
+        <link rel= "stylesheet" href="assets/css/stylelogin.css">
+        <link href="assets/css/stylesponsors.css" rel="stylesheet">
+        <script src="assets/js/anime.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Rancho&display=swap');
+        </style>
+    </head>
+
+
+    <body>
+        <header>
+            <nav>
+              <a href="index.html"><img src="assets/logo-black.jpeg" alt="logo" /></a>
+              <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="aboutus.html">About Us</a></li>
+                  <li><a href="resonance.html">Resonance</a></li>
+                  <li><a href="sponsors.html">Sponsors</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="workshops.html">Workshops</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="login.html">Login</a></li>
+                </ul>
+              </div>
+              <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+          </header>
+        <div class="hero">
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                    <button type="button" class="toggle-btn" onclick="register()">Register</button>
+                </div>
+                <form id="login" class = "input-group">
+                    <input type="text" class="input-field" placeholder="Email Id" required>
+                    <input type="password" class="input-field" placeholder=" User Password" required>
+                    <button type="submit" class="submit-btn ">Log in</button>
+                </form>
+                <form name="regForm" id="register" class = "input-group" onsubmit="return validateform()">
+                    <input name ="Name" type="text" class="input-field" placeholder="Name" required minlength="3">
+                    <input name ="College Name" type="text" class="input-field" placeholder="College Name" required>
+                    <input name ="Degree" type="text" class="input-field" placeholder="Degree" required>
+                    <input name ="Branch" type="text" class="input-field" placeholder="Branch" required>
+                    <input name ="Year of study" type="" class="input-field" placeholder="Year of study(in number)" required>
+                    <input name ="Email Id" type="email" class="input-field" placeholder="Email Id" required>
+                    <input name ="User Password" type="password" class="input-field" placeholder=" User Password" required minlength="8" >
+                    <input name ="Confirm Password" type="password" class="input-field" placeholder="Confirm Password" required>
+                    <button type="submit" class="submit-btn ">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            var signIn = document.getElementById("login");
+            var signUp = document.getElementById("register");
+            var toggleButton = document.getElementById("btn");
+
+            function register(){
+                signIn.style.left= "-400px";
+                signUp.style.left = "50px";
+                toggleButton.style.left = "110px";
+            }
+            function login(){
+                signIn.style.left= "50px";
+                signUp.style.left = "450px";
+                toggleButton.style.left = "0px";
+            }
+            function validateform(){
+                console.log("Entering validation");
+                var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                let passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+                let name = document.forms['regForm']['Name'].value.trim();
+                let college_name = document.forms['regForm']['College Name'].value.trim();
+                let degree = document.forms['regForm']['Degree'].value.trim();
+                let branch = document.forms['regForm']['Branch'].value.trim();
+                let yr_of_study = document.forms['regForm']['Year of study'].value.trim();
+                let email_id = document.forms['regForm']['Email Id'].value.trim();
+                let userpassword = document.forms['regForm']['User Password'].value.trim();
+                let confirmpassword = document.forms['regForm']['Confirm Password'].value.trim();
+                if(name==""|| name.length<3){
+                    alert("Name must contain atleast 3 characters");
+                    return false;
+                }
+                else if (!/^[a-zA-Z]*$/g.test(name)) {
+                    alert("Invalid Name");
+                    return false;
+                }
+                else if(college_name==""){
+                    alert("College name must be filled");
+                    return false;
+                }
+                else if(degree==""){
+                    alert("Degree must be filled");
+                    return false;
+                }
+                else if(branch==""){
+                    alert("Branch must be filled");
+                    return false;
+                }
+                else if(parseInt(yr_of_study)>5|| parseInt(yr_of_study)<=0||isNaN(parseInt(yr_of_study))){
+                    alert("Enter correct year of study");
+                    return false;
+                }
+                else if(! email_id.match(mailformat))
+                 {
+                  alert("Invalid email address!");
+                  return false;
+                 }
+                 else if(userpassword==""){
+                     alert("User Password cannot be empty");
+                     return false;
+                 }
+                 else if(! passwordPattern.test(userpassword)){
+                     alert("Password must contains atleast one number and one special character!");
+                     return false;
+                 }
+                 else if(confirmpassword!=userpassword){
+                     alert("Confirm password must be same as user password");
+                     return false;
+                 }
+
+            }
+
+        </script>
+
+    </body>
+</html>

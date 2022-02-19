@@ -78,7 +78,9 @@ const run = async () => {
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'Views'));
+
 app.post('/api/v1/payments/webhookVerify', express.raw({type:'application/json'}),paymentController.webhookVerify);
+
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 

@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "dev": "set NODE_ENV=development&& nodemon server.js",
-    "prod": "set NODE_ENV=production&& nodemon server.js"
+    "prod": "set NODE_ENV=production&& nodemon server.js",
+    "watch:js": "parcel watch ./Public/js/index.js  --out-dir ./Public/js --out-file bundle.js",
+    "build:js": "parcel build ./Public/js/index.js  --out-dir ./Public/js --out-file bundle.js"
   },
   "repository": {
     "type": "git",

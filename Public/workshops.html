@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width",initial-scale=1.0">
+        <title>Workshops</title>
+        <link rel="stylesheet" href="assets/css/styleworkshops.css">
+        <link href="assets/css/stylesponsors.css" rel="stylesheet">
+           
+        <style>
+             @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Rancho&display=swap');
+            *{
+                margin: 0;
+                padding:0;
+                box-sizing: border-box;
+                font-family: "Nunito";               
+            }
+            .center_div{
+                display: grid;
+                place-items: center;
+            }
+            h1{
+                color: #fff;/*#fff*/
+                font-size: 4rem;
+                text-transform: uppercase;
+                position: relative;
+            }
+            h1::before{
+                content: "Workshops";
+                width: 100%;
+                color: #2ed573;
+                position:absolute;
+                top:0;
+                left:0;
+                border-right:.4rem solid #2ed573;
+                animation: slide 3s linear infinite;
+                -webkit-animation: slide 3s linear infinite;
+                overflow: hidden;
+            }
+    @keyframes slide{
+        0%{
+            width: 0%;
+        }
+        50%{
+            width: 100%;
+        }
+        100%{
+            width: 0%;
+        }
+    }
+    </style>
+    </head>
+    <body>
+        <header>
+            <nav>
+              <a href="index.html"><img src="assets/logo-black.jpeg" alt="logo" /></a>
+              <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="aboutus.html">About Us</a></li>
+                  <li><a href="resonance.html">Resonance</a></li>
+                  <li><a href="sponsors.html">Sponsors</a></li>
+                  <li><a href="events.html">Events</a></li>
+                  <li><a href="workshops.html">Workshops</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                  <li><a href="login.html">Login</a></li>
+                </ul>
+              </div>
+              <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+          </header>
+        <div class="center_div">
+            <h1>Workshops</h1>
+        </div>
+        <div class="container"> 
+            <div class="card">
+                <div class="circle">
+                    <h2>01</h2>
+                </div>
+                <div class="content">
+                    <p> 
+                        IIT Madras, India’s top technical institute, welcomes you to the world’s first BSc Degree program in Programming and Data Science.                        
+                        <br>
+                        For the first time, you can work towards an UG degree / diploma from an IIT regardless of your age or location.
+                        <br>
+                        <b>Prof. Bhaskar Ramamurthi, Director, IIT Madras</b></p>
+                    <a href="#">Register</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="circle">
+                    <h2>02</h2>
+                </div>
+                <div class="content">
+                    <p> 
+                        IIT Madras, India’s top technical institute, welcomes you to the world’s first BSc Degree program in Programming and Data Science.                        
+                        <br>
+                        For the first time, you can work towards an UG degree / diploma from an IIT regardless of your age or location.
+                        <br>
+                        <b>Prof. Bhaskar Ramamurthi, Director, IIT Madras</b></p>
+                <a href="#">Register</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="circle">
+                    <h2>03</h2>
+                </div>
+                <div class="content">
+                    <p> 
+                        IIT Madras, India’s top technical institute, welcomes you to the world’s first BSc Degree program in Programming and Data Science.                        
+                        <br>
+                        For the first time, you can work towards an UG degree / diploma from an IIT regardless of your age or location.
+                        <br>
+                        <b>Prof. Bhaskar Ramamurthi, Director, IIT Madras</b></p>
+                <a href="#">Register</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="circle">
+                    <h2>04</h2>
+                </div>
+                <div class="content">
+                    <p> 
+                        IIT Madras, India’s top technical institute, welcomes you to the world’s first BSc Degree program in Programming and Data Science.                        
+                        <br>
+                        For the first time, you can work towards an UG degree / diploma from an IIT regardless of your age or location.
+                        <br>
+                        <b>Prof. Bhaskar Ramamurthi, Director, IIT Madras</b></p>
+                <a href="#">Register</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="circle">
+                    <h2>05</h2>
+                </div>
+                <div class="content">
+                    <p> 
+                        IIT Madras, India’s top technical institute, welcomes you to the world’s first BSc Degree program in Programming and Data Science.                        
+                        <br>
+                        For the first time, you can work towards an UG degree / diploma from an IIT regardless of your age or location.
+                        <br>
+                        <b>Prof. Bhaskar Ramamurthi, Director, IIT Madras</b></p>
+                    <a href="#">Register</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

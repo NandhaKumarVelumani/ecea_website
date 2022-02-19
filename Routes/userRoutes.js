@@ -15,6 +15,7 @@ router.use(authenticateToken.authenticateToken);
 router.patch('/updateMyPassword',authController.updatePassword);
 router.patch('/updateMe', userController.updateMe);
 router.get('/me',userController.getMe, userController.getUser);
+
 //ADMIN AUTH REQUIRED HERE (should remove below routes in final version!)
 router.get('/',userController.getAllUsers);
 router.get('/:id',userController.getUser);
