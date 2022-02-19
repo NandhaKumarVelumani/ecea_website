@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif ;
+}
+body
+{
+    overflow-x: hidden;
+}
+section
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    width: 100%;
+    background: #001923;
+}
+section::before
+{
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(#ffeb3b,#e91e63);
+    border-radius: 50%;
+    transform: translate(-420px,-180px);
+}
+section::after
+{
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(#2196f3,#83d8ff);
+    border-radius: 50%;
+    transform: translate(440px,180px);
+}
+.container
+{
+    position: relative;
+    z-index:1000 ;
+    width: 100%;
+    max-width:1000px;
+    padding: 50px;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    border:1px solid rgba(255,255,255,0.25);
+    border-right:1px solid rgba(255,255,255,0.1);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    backdrop-filter: blur(30px);
+
+}
+.container h1{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+.container .row1
+{
+position: relative;
+width: 100%;
+display: grid;
+grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+}
+.container .row1 .col1
+{
+    position: relative;
+    width: 100%;
+    padding: 0 10px;
+    margin:30px 0 20px;
+}
+.container .row1 .col1 .inputbox
+{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    color:#fff;
+}
+.container .row1 .col1 .inputbox input,
+.container .row1 .col1 .inputbox textarea
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    padding: 0 10px;
+    z-index: 1;
+    color: #000;
+}
+.container .row1 .col1 .inputbox .text
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    font-size: 15px;
+    padding: 0 10px;
+    display: block;
+    transition: 0.5s;
+    pointer-events: none;
+}
+.container .row1 .col1 .inputbox input:focus+ .text,
+.container .row1 .col1 .inputbox input:valid+ .text,
+.container .row1 .col1 .inputbox textarea:focus+ .text,
+.container .row1 .col1 .inputbox textarea:valid+ .text
+{
+top: -35px;
+left: -10px;
+}
+.container .row1 .col1 .inputbox .line
+{
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    transition: 0.5s;
+    border-radius: 5px;
+    pointer-events: none;
+}
+.container .row1 .col1 .inputbox input:focus ~.line,
+.container .row1 .col1 .inputbox input:valid ~.line
+{
+    height: 100%;
+}
+.container .row1 .col1 .inputbox.textarea
+{   position: relative;
+    height: 100px;
+    width: 100%;
+    padding: 10px 0;
+}
+.container .row1 .col1 .inputbox textarea:focus ~.line,
+.container .row1 .col1 .inputbox textarea:valid ~.line
+{
+    height: 100%;
+}
+.container .row1 .col1 input[type="submit"]
+{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 40px;
+    cursor: pointer;
+    outline: none;
+    background: #fff;
+    color:#000;
+    font-weight: 500;
+    font-size: 15px;
+}
+@media (max-width: 768px)
+{
+    section::before
+    {
+        transform: translate(-200px,-180px);
+
+    }
+    section::after{
+        transform: translate(220px,180px);
+
+    }
+    .container{
+        padding: 20px;
+    }
+    .container h1
+    {
+        font-size: 28px;
+    }
+}
+body,html{
+    width:100%;
+    height: 100%;
+  }
+  body{
+    margin:0;
+    padding:0;
+    background:#000;
+  }
+  .bubbles{
+    position:absolute;
+    width:100%;
+    height: 100%;
+    z-index:0;
+    overflow:hidden;
+    top:0;
+    left:0;
+  }
+  .bubble{
+    position: absolute;
+    bottom:-100px;
+    width:40px;
+    height: 40px;
+    background:linear-gradient(#ffeb3b,#e91e63);
+    border-radius:50%;
+    opacity:0.5;
+    animation: rise 10s infinite ease-in;
+  }
+  .bubble:nth-child(1){
+    width:40px;
+    height:40px;
+    left:10%;
+    background: linear-gradient(#2196f3,#83d8ff);
+    animation-duration:8s;
+  }
+  .bubble:nth-child(2){
+    width:20px;
+    height:20px;
+    left:20%;
+    animation-duration:5s;
+    background: linear-gradient(#2196f3,#83d8ff);
+    animation-delay:1s;
+  }
+  .bubble:nth-child(3){
+    width:50px;
+    height:50px;
+    left:35%;
+    animation-duration:7s;
+    animation-delay:2s;
+  }
+  .bubble:nth-child(4){
+    width:80px;
+    height:80px;
+    left:50%;
+    animation-duration:11s;
+    background: linear-gradient(#2196f3,#83d8ff);
+    animation-delay:0s;
+  }
+  .bubble:nth-child(5){
+    width:35px;
+    height:35px;
+    left:55%;
+    animation-duration:6s;
+    animation-delay:1s;
+  }
+  .bubble:nth-child(6){
+    width:45px;
+    height:45px;
+    left:65%;
+    animation-duration:8s;
+    animation-delay:3s;
+  }
+  .bubble:nth-child(7){
+    width:90px;
+    height:90px;
+    left:70%;
+    animation-duration:12s;
+    background: linear-gradient(#2196f3,#83d8ff);
+    animation-delay:2s;
+  }
+  .bubble:nth-child(8){
+    width:25px;
+    height:25px;
+    left:80%;
+    animation-duration:6s;
+    animation-delay:2s;
+  }
+  .bubble:nth-child(9){
+    width:15px;
+    height:15px;
+    left:70%;
+    animation-duration:5s;
+    background: linear-gradient(#2196f3,#83d8ff);
+    animation-delay:1s;
+  }
+  .bubble:nth-child(10){
+    width:90px;
+    height:90px;
+    left:25%;
+    animation-duration:10s;
+    background: linear-gradient(#f321bf,#83d8ff);
+    animation-delay:4s;
+  }
+  @keyframes rise{
+    0%{
+      bottom:-100px;
+      transform:translateX(0);
+    }
+    50%{
+      transform:translate(100px);
+    }
+    100%{
+      bottom:1080px;
+      transform:translateX(-200px);
+    }
+  }
