@@ -6,9 +6,6 @@ const menu = {
   mongoose: { name: 'mongooseResources', icon: 'SpineLabel' }
 }
 
-
-
-
 module.exports = {
-        resources: [User,Booking],
+  resources: [User,Booking],
 }
