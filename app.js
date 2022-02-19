@@ -20,6 +20,7 @@ const paymentRouter = require('./Routes/paymentRoutes');
 const workshopRouter = require('./Routes/workshopRoutes');
 const eventRouter = require('./Routes/eventRoutes');
 const bookingRouter = require('./Routes/bookingRoutes');
+const eventbookingRouter = require('./Routes/eventbookingRoutes');
 const User = require('./Models/userModel');
 const Booking = require('./Models/bookingModel');
 const Workshop = require('./Models/workshopModel');
@@ -72,7 +73,7 @@ const run = async () => {
   .catch(err => {
     console.log('Local DB not connected...')
   });;
-  app.listen(8080, () => console.log('AdminJs is under localhost:8080/admin'));
+  app.listen(process.env.PORT, () => console.log('AdminJs is under localhost:3000/admin'));
 }
 
 app.set('view engine', 'pug');
@@ -88,8 +89,8 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/payments', paymentRouter);
 app.use('/api/v1/workshops', workshopRouter);
 app.use('/api/v1/events', eventRouter);
-app.use('/api/v1/bookings', bookingRouter);
-
+app.use('/api/v1/workshopBookings', bookingRouter);
+app.use('/api/v1/eventBookings', eventbookingRouter);
 // error handlers
 app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

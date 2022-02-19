@@ -6,21 +6,17 @@ const authenticateToken = require('../Controllers/authenticateToken');
 const router = express.Router();
 
 router.post('/signup', authController.signup);
+router.post('/signIn', authController.signIn);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
 //Add Protect Middleware here 
-router.patch('/updateMyPassword', authenticateToken.authenticateToken, authController.updatePassword);
-router.patch('/updateMe', authenticateToken.authenticateToken, userController.updateMe);
-
-//ADMIN AUTH REQUIRED HERE
-router
-  .route('/')
-  .get(userController.getAllUsers);
-router
-  .route('/:id')
-  .get(userController.getUser)
-  .patch(userController.updateUser)
-  .delete(userController.deleteUser);
+router.use(authenticateToken.authenticateToken);
+router.patch('/updateMyPassword',authController.updatePassword);
+router.patch('/updateMe', userController.updateMe);
+router.get('/me',userController.getMe, userController.getUser);
+//ADMIN AUTH REQUIRED HERE (should remove below routes in final version!)
+router.get('/',userController.getAllUsers);
+router.get('/:id',userController.getUser);
 
 module.exports = router;

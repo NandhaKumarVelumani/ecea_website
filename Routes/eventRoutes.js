@@ -3,14 +3,13 @@ const eventController = require('../Controllers/eventController');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(eventController.getAllEvents)
-  .post(eventController.createEvent);
+router.get('/',eventController.getAllEvents);
+router.get('/:id',eventController.getEvent);
+  
+//ADMIN AUTH REQUIRED HERE(should remove below routes in final version!)
+router.post(eventController.createEvent);
 router
   .route('/:id')
-  .get(eventController.getEvent)
   .patch(eventController.updateEvent)
   .delete(eventController.deleteEvent);
-  
 module.exports = router;
