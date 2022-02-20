@@ -1,0 +1,60 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title vision
+  link(rel='stylesheet' href='assets/css/stylesponsors.css')
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  style.
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Rancho&display=swap');
+  link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel='stylesheet')
+header
+  nav
+    a(href='index.html')
+      img(src='assets/logo-black.jpeg' alt='logo')
+    #navLinks.nav-links
+      i.fa.fa-times(onclick='hideMenu()')
+      ul
+        li
+          a(href='index.html') Home
+        li
+          a(href='aboutus.html') About Us
+        li
+          a(href='resonance.html') Resonance
+        li
+          a(href='sponsors.html') Sponsors
+        li
+          a(href='events.html') Events
+        li
+          a(href='workshops.html') Workshops
+        li
+          a(href='contact.html') Contact Us
+        li
+          a(href='login.html') Login
+    i.fa.fa-bars(onclick='showMenu()')
+.container
+  .banner
+  .sponsors
+    .title SPONSORS
+    .sponsors-grid
+      .grid-item.grid1
+      .grid-item.grid2
+      .grid-item.grid3
+      .grid-item.grid4
+      .grid-item.grid5
+      .grid-item.grid6
+      .grid-item.grid7
+      //
+        <div class="grid-item grid8"></div>
+        <div class="grid-item grid9"></div>
+section.footer
+  p copyright @2022
+  .icons
+    i.fa.fa-facebook
+    i.fa.fa-twitter
+    i.fa.fa-instagram
+    i.fa.fa-linkedin
+script(src='script.js')
+script(src='index.js')
